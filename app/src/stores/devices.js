@@ -20,7 +20,7 @@ export default {
             context.commit('setDevices', await Api.devices());
         },
         async getDevice (context, { id }) {
-            context.commit('setDevice', await Api.devices(id));
+            context.commit('setDevice', await Api.device(id));
         },
         clearDevice (context) {
             context.commit('setDevice', null);

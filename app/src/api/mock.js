@@ -108,7 +108,7 @@ const getDevices = () => {
 
 const getDevice = (id) => {
     id = parseInt(id);
-    const device = getDevices.filter((device) => device.id === id).shift();
+    const device = getDevices().filter((device) => device.id === id).shift();
     if (device) {
         return device;
     }

@@ -17,10 +17,10 @@ export default {
     },
     actions: {
         async getPorts (context, payload = {}) {
-            context.commit('setPorts', await Api.ports());
+            context.commit('setPorts', await Api.ports(payload.device));
         },
         async getPort (context, { id }) {
-            context.commit('setPort', await Api.ports(id));
+            context.commit('setPort', await Api.port(id));
         },
         clearPort (context) {
             context.commit('setPort', null);
