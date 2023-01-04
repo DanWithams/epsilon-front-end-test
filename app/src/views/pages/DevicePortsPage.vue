@@ -1,7 +1,7 @@
 <template>
   <div>
     <DeviceTile :device="device" class="mb-8"></DeviceTile>
-    <h1 class="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-300">Ports</h1>
+    <h2 class="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-300">Ports</h2>
     <List>
       <div v-for="port in ports">
         <PortListItem :port="port"></PortListItem>

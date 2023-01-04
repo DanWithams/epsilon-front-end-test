@@ -27,7 +27,6 @@ export default {
     device: {
       required: true,
       type: Object,
-      validator: value => value.hasOwnProperty('id'),
     },
   },
   computed: {

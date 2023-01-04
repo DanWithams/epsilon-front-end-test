@@ -1,4 +1,5 @@
 import {default as Api} from "../api/mock.js";
+import Device from "../models/device.js";
 
 export default {
     namespaced: true,
@@ -17,10 +18,11 @@ export default {
     },
     actions: {
         async getDevices (context, payload = {}) {
-            context.commit('setDevices', await Api.devices());
+            const devices = await Api.devices()
+            context.commit('setDevices', devices.map(device => new Device(device)));
         },
         async getDevice (context, { id }) {
-            context.commit('setDevice', await Api.device(id));
+            context.commit('setDevice', new Device(await Api.device(id)));
         },
         clearDevice (context) {
             context.commit('setDevice', null);

@@ -2,6 +2,8 @@ import HomePage from "../views/pages/HomePage.vue";
 import Page2Page from "../views/pages/Page2Page.vue";
 import DevicesPage from "../views/pages/DevicesPage.vue";
 import DevicePortsPage from "../views/pages/DevicePortsPage.vue";
+import JobsPage from "../views/pages/JobsPage.vue";
+import CablesPage from "../views/pages/CablesPage.vue";
 
 export default [
     {
@@ -28,6 +30,24 @@ export default [
         component: DevicePortsPage,
         meta: {
             title: 'Device Ports',
+            layoutProps: {}
+        },
+    },
+    {
+        name: 'cables',
+        path: '/cables',
+        component: CablesPage,
+        meta: {
+            title: 'Cables',
+            layoutProps: {}
+        },
+    },
+    {
+        name: 'jobs',
+        path: '/jobs',
+        component: JobsPage,
+        meta: {
+            title: 'Jobs',
             layoutProps: {}
         },
     },
