@@ -16,6 +16,11 @@ import AppLayout from "./views/layouts/AppLayout.vue";
 
 export default {
   components: {AppLayout},
+  watch: {
+    '$store.state.app.darkMode': (darkMode) => {
+      document.body.classList.toggle('dark', darkMode);
+    },
+  },
 }
 </script>
 

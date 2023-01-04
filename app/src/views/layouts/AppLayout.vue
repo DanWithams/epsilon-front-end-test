@@ -16,14 +16,14 @@
         <div class="py-6">
           <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
             <div class="block md:hidden absolute top-6 right-6 cursor-pointer" @click="openSidebar">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-black dark:text-white">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             </div>
-            <h1 class="text-2xl font-semibold text-gray-900">{{ $route.meta.title }}</h1>
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-gray-300">{{ $route.meta.title }}</h1>
           </div>
           <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-            <div class="py-4">
+            <div class="py-4 text-black dark:text-white">
               <slot name="default"></slot>
             </div>
           </div>
