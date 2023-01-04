@@ -3,19 +3,20 @@
 
   </div>
   <div class="z-10">
-    <ul class="border-b border-black">
-      <li>
-        <router-link :to="{ name: 'home' }">Home</router-link>
-      </li>
-      <li>
-        <router-link :to="{ name: 'page-2' }">Page2</router-link>
-      </li>
-    </ul>
-    <router-view></router-view>
+    <router-view class="z-10" v-slot="{ Component, route }">
+      <component v-bind="route.meta.layoutProps" :is="route.meta.layout || 'AppLayout'">
+          <component :is="Component" :key="route.meta.baseName || route.name"></component>
+      </component>
+    </router-view>
   </div>
 </template>
-<script>
 
+<script>
+import AppLayout from "./views/layouts/AppLayout.vue";
+
+export default {
+  components: {AppLayout},
+}
 </script>
 
 <style scoped>
