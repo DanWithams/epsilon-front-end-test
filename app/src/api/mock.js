@@ -1,4 +1,4 @@
-import {Random} from "../helpers/random.js";
+import Random from "../helpers/random.js";
 import { v4 as uuidv4 } from 'uuid';
 
 const devices = [
@@ -112,11 +112,11 @@ const mockRequest = async (returnValue) => {
     );
 }
 
-const getDevices = () => {
+export const getDevices = () => {
     return [].concat(devices);
 };
 
-const getDevice = (id) => {
+export const getDevice = (id) => {
     id = parseInt(id);
     const device = getDevices().filter((device) => device.id === id).shift();
     if (device) {
@@ -125,7 +125,7 @@ const getDevice = (id) => {
     throw new Error('Device not found')
 };
 
-const getPort = (id) => {
+export const getPort = (id) => {
     const ports = [];
     getDevices()
         .forEach(
@@ -138,11 +138,19 @@ const getPort = (id) => {
     throw new Error('Port not found');
 }
 
-const getJob = (id) => {
+export const getJobs = () => {
+    return jobs;
+}
+
+export const getJob = (id) => {
     return jobs.filter(job => job.id === id).shift();
 }
 
-const getCable = (id) => {
+export const getCables = () => {
+    return cables;
+}
+
+export const getCable = (id) => {
     return cables.filter(cable => cable.id === id).shift();
 }
 
