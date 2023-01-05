@@ -1,3 +1,6 @@
+import {default as Api} from "../api/mock.js";
+import Cable from "../models/cable.js";
+
 export default {
     namespaced: true,
     state: () => ({
@@ -5,19 +8,15 @@ export default {
     }),
     getters: {},
     mutations: {
-        addCable (state, payload) {
-            state.cables.push(payload);
-        },
-        removeCable (state, { id }) {
-            state.cables = state.cables.filter(cable => cable.id !== id);
+        setCables (state, payload) {
+            console.log(payload);
+            state.cables = payload;
         },
     },
     actions: {
-        addCable (context, payload = {}) {
-            context.commit('addCable', payload);
-        },
-        removeCable (context, payload) {
-            context.commit('removeCable', payload);
+        async getCables (context, payload = {}) {
+            const cables = await Api.cables()
+            context.commit('setCables', cables.map(cable => new Cable(cable)));
         },
     },
 }

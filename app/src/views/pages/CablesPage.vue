@@ -1,9 +1,14 @@
 <template>
-  <List>
-    <div v-for="cable in cables">
-      <CableListItem :cable="cable"></CableListItem>
+  <div>
+    <List v-if="cables.length > 0">
+      <div v-for="cable in cables">
+        <CableListItem :cable="cable"></CableListItem>
+      </div>
+    </List>
+    <div v-if="cables.length === 0" class="flex flex-row h-64 justify-center items-center text-zinc-400 dark:text-zinc-500">
+      There are no cables to show
     </div>
-  </List>
+  </div>
 </template>
 
 <script>
@@ -14,12 +19,7 @@ export default {
   name: "CablesPage",
   components: {CableListItem, List},
   async mounted() {
-    await this.$store.dispatch('devices/getDevices');
-    [
-      { id: 1, name: 'C-000123', aPort: this.$store.state.devices.devices[0].ports[0], zPort: this.$store.state.devices.devices[1].ports[0]},
-      { id: 2, name: 'C-000777', aPort: this.$store.state.devices.devices[1].ports[1], zPort: this.$store.state.devices.devices[2].ports[0] },
-      { id: 3, name: 'C-000911', aPort: this.$store.state.devices.devices[2].ports[1], zPort: this.$store.state.devices.devices[0].ports[1] },
-    ].forEach(cable => this.$store.dispatch('cables/addCable', cable));
+    await this.$store.dispatch('cables/getCables');
   },
   computed: {
     cables() {

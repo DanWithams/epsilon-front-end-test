@@ -1,6 +1,6 @@
 <template>
   <div class="z-50">
-
+    <div id="modal-container"></div>
   </div>
   <div class="z-10">
     <router-view class="z-10" v-slot="{ Component, route }">

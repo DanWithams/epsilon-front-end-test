@@ -1,3 +1,4 @@
+import {default as Api} from "../api/mock.js";
 import Job from "../models/job.js";
 
 export default {
@@ -7,21 +8,14 @@ export default {
     }),
     getters: {},
     mutations: {
-        addJob (state, payload) {
-            state.jobs.push(
-                new Job(payload)
-            );
-        },
-        removeJob (state, { id }) {
-            state.jobs = state.jobs.filter(job => job.id !== id);
+        setJobs (state, payload) {
+            state.jobs = payload;
         },
     },
     actions: {
-        addJob (context, payload = {}) {
-            context.commit('addJob', payload);
-        },
-        removeJob (context, payload) {
-            context.commit('removeJob', payload);
+        async getJobs (context, payload = {}) {
+            const jobs = await Api.jobs()
+            context.commit('setJobs', jobs.map(job => new Job(job)));
         },
     },
 }

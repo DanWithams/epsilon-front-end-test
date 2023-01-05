@@ -1,4 +1,5 @@
 import {default as Api} from "../api/mock.js";
+import Device from "../models/device.js";
 
 export default {
     namespaced: true,
@@ -17,7 +18,12 @@ export default {
     },
     actions: {
         async getPorts (context, payload = {}) {
-            context.commit('setPorts', await Api.ports(payload.device));
+            const ports = [];
+            const devices = await Api.devices();
+            devices.map(device => new Device(device))
+                .forEach(device => device.ports.forEach(port => ports.push(port)));
+
+            context.commit('setPorts', ports);
         },
         async getPort (context, { id }) {
             context.commit('setPort', await Api.port(id));
