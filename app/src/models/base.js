@@ -5,10 +5,10 @@ class InstanceManager {
     }
 
     add(model) {
-        if (!this.pool[model.constructor.name]) {
-            this.pool[model.constructor.name] = {};
+        if (!this.pool[model.getModelName()]) {
+            this.pool[model.getModelName()] = {};
         }
-        this.pool[model.constructor.name][model.getId()] = model;
+        this.pool[model.getModelName()][model.getId()] = model;
     }
 
     get(type, id) {
@@ -28,6 +28,10 @@ export default class BaseModel {
 
     getId() {
         return this.id;
+    }
+
+    getModelName() {
+        throw new Error('This methods needs overriding.');
     }
 
     hydrate(data) {

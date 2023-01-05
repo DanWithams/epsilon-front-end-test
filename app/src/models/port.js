@@ -19,6 +19,10 @@ export default class Port extends BaseModel {
         }
     }
 
+    getModelName() {
+        return 'Port';
+    }
+
     getId() {
         return this.pId;
     }

@@ -14,6 +14,10 @@ export default class Cable extends BaseModel {
         this.generateName();
     }
 
+    getModelName() {
+        return 'Cable';
+    }
+
     generateName() {
         return this.name = `${this.aPort.fullyQualifiedName}-${this.zPort.fullyQualifiedName}`;
     }
