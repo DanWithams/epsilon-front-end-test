@@ -1,5 +1,4 @@
 import HomePage from "../views/pages/HomePage.vue";
-import Page2Page from "../views/pages/Page2Page.vue";
 import DevicesPage from "../views/pages/DevicesPage.vue";
 import DevicePortsPage from "../views/pages/DevicePortsPage.vue";
 import JobsPage from "../views/pages/JobsPage.vue";
@@ -48,14 +47,6 @@ export default [
         component: JobsPage,
         meta: {
             title: 'Jobs',
-            layoutProps: {}
-        },
-    },
-    {
-        name: 'page-2',
-        path: '/page-2',
-        component: Page2Page,
-        meta: {
             layoutProps: {}
         },
     },
