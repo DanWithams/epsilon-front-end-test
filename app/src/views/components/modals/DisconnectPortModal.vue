@@ -1,14 +1,12 @@
 <template>
-  <ModalFrame title="Connect Port" @modal:show="handleModalShow" @modal:hide="handleModalHide">
+  <ModalFrame title="Disconnect Port">
     <template v-slot:body>
-      <p class="mb-2 text-gray-800 dark:text-zinc-400">Create a job to connect the port.</p>
-      <FormLabel>Select Port</FormLabel>
-      <InputSelect :options="ports" v-model="zPort" labelled-by="fullyQualifiedName"></InputSelect>
+      <p class="mb-2 text-gray-800 dark:text-zinc-400">Create a job to disconnect the port.</p>
     </template>
     <template v-slot:footer="{ hideModal }">
       <div class="w-full flex flex-row justify-between">
         <ButtonDefault @click="hideModal">Close</ButtonDefault>
-        <ButtonPrimary :disabled="!zPort" @click="createJob">Create Job</ButtonPrimary>
+        <ButtonPrimary @click="createJob">Create Job</ButtonPrimary>
       </div>
     </template>
   </ModalFrame>
@@ -23,37 +21,23 @@ import ButtonPrimary from "../ButtonPrimary.vue";
 import {default as Api} from "../../../api/mock.js";
 
 export default {
-  name: "ConnectPortModal",
+  name: "DisconnectPortModal",
   emits: ['job:created'],
   components: {ButtonPrimary, ButtonDefault, InputSelect, FormLabel, ModalFrame},
   props: {
-    aPort: {
+    cable: {
 
     }
   },
-  data() {
-    return {
-      zPort: null,
-    };
-  },
   computed: {
-    ports() {
-      return this.$store.state.ports.ports.filter(
-          port => port.pId !== this.aPort.pId && !port.cable && !port.job
-      );
+    otherPort() {
+      return {};
     }
   },
   methods: {
-    handleModalShow() {
-      this.$store.dispatch('ports/getPorts');
-    },
-    handleModalHide() {
-      this.zPort = null;
-    },
     async createJob() {
-      await Api.createConnectJob({
-        aPort: this.aPort,
-        zPort: this.zPort,
+      await Api.createDisconnectJob({
+        cable: this.cable,
       });
       this.$emit('job:created');
     },

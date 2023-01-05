@@ -9,7 +9,6 @@ export default class Port extends BaseModel {
         super(data);
         if (this.job && !(this.job instanceof Job)) {
             this.job = this.instanceManager.get('Job', this.job.id) || new Job(this.job);
-
         }
         if (this.cable && !(this.cable instanceof Cable)) {
             this.cable = this.instanceManager.get('Cable', this.cable.id) || new Cable(this.cable);

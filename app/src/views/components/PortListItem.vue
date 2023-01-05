@@ -58,7 +58,11 @@ export default {
       return this.port.cable ? this.port.cable.otherPort(this.port).device.deviceHeader : 'N/A';
     },
     cableName() {
-      return this.port.cable ? this.port.cable.name : 'N/A';
+      if (this.port.cable) {
+        this.port.cable.generateName();
+        return this.port.cable.name
+      }
+      return 'N/A';
     },
   },
   methods: {

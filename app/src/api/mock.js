@@ -101,7 +101,7 @@ const devices = [
 
 
 const jobs = [];
-const cables = [];
+let cables = [];
 
 const mockRequest = async (returnValue) => {
     return new Promise(
@@ -142,6 +142,10 @@ const getJob = (id) => {
     return jobs.filter(job => job.id === id).shift();
 }
 
+const getCable = (id) => {
+    return cables.filter(cable => cable.id === id).shift();
+}
+
 export default class Mock {
     static async devices() {
         return mockRequest(getDevices());
@@ -155,12 +159,13 @@ export default class Mock {
         return mockRequest(getPort(id));
     }
 
-    static async createJob({ aPort, zPort, type }) {
+    static async createConnectJob({ aPort, zPort }) {
         const job = {
             id: uuidv4(),
             aPort,
             zPort,
-            type,
+            type: 'connect',
+            created_at: (new Date()).getTime(),
         };
         jobs.push(job);
 
@@ -169,6 +174,25 @@ export default class Mock {
 
         aPort.job = job;
         zPort.job = job;
+
+        return mockRequest(job);
+    }
+
+    static async createDisconnectJob({ cable }) {
+        const job = {
+            id: uuidv4(),
+            aPort: cable.aPort,
+            zPort: cable.zPort,
+            cable,
+            type: 'disconnect',
+            created_at: (new Date()).getTime(),
+        };
+        jobs.push(job);
+
+        cable = getCable(cable.id);
+
+        cable.aPort.job = job;
+        cable.zPort.job = job;
 
         return mockRequest(job);
     }
@@ -183,21 +207,27 @@ export default class Mock {
         aPort.job = null;
         zPort.job = null;
 
-        const cable = {
-            aPort,
-            zPort,
-        };
+        if (job.type === 'connect') {
+            const cable = {
+                aPort,
+                zPort,
+            };
 
-        cables.push(cable);
+            cables.push(cable);
 
-        aPort.cable = cable;
-        zPort.cable = cable;
+            aPort.cable = cable;
+            zPort.cable = cable;
+        } else {
+            cables = cables.filter(cable => cable.id !== job.cable.id);
+            aPort.cable = null;
+            zPort.cable = null;
+        }
 
         return mockRequest(job);
     }
 
     static async jobs() {
-        return mockRequest(jobs);
+        return mockRequest(jobs.sort((a, b) => a.created_at > b.created_at ? -1 : 1));
     }
 
     static async cables() {

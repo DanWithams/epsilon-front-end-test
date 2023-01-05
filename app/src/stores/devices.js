@@ -13,7 +13,6 @@ export default {
             state.devices = payload;
         },
         setDevice (state, payload) {
-            console.log(payload);
             state.device = payload;
         },
     },

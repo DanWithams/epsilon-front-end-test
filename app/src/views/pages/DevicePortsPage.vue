@@ -6,7 +6,7 @@
       <div v-for="port in ports">
         <PortListItem :port="port"
                       @connect-modal:show="showConnectModal(port)"
-                      @disconnect-modal:show="showDisconnectModal">
+                      @disconnect-modal:show="showDisconnectModal(port)">
         </PortListItem>
       </div>
     </List>
@@ -14,6 +14,10 @@
                       :a-port="selectedPort"
                       @job:created="handleJobCreated">
     </ConnectPortModal>
+    <DisconnectPortModal v-model:show="disconnectModalVisible"
+                      :cable="selectedCable"
+                      @job:created="handleJobCreated">
+    </DisconnectPortModal>
   </div>
 </template>
 
@@ -22,16 +26,17 @@ import DeviceTile from "../components/DeviceTile.vue";
 import PortListItem from "../components/PortListItem.vue";
 import List from "../components/List.vue";
 import ConnectPortModal from "../components/modals/ConnectPortModal.vue";
+import DisconnectPortModal from "../components/modals/DisconnectPortModal.vue";
 
 export default {
   name: "DevicePortPage",
-  components: {ConnectPortModal, List, PortListItem, DeviceTile},
+  components: {DisconnectPortModal, ConnectPortModal, List, PortListItem, DeviceTile},
   mounted() {
     this.getDevice();
   },
   data() {
     return {
-      selectedPort: false,
+      selectedPort: null,
       connectModalVisible: false,
       disconnectModalVisible: false,
     };
@@ -42,6 +47,9 @@ export default {
     },
     ports() {
       return this.device.ports || [];
+    },
+    selectedCable() {
+      return (this.selectedPort || {}).cable;
     }
   },
   methods: {
@@ -50,6 +58,7 @@ export default {
     },
     handleJobCreated() {
       this.hideConnectModal();
+      this.hideDisconnectModal();
       this.selectedPort = null;
       this.getDevice();
     },
@@ -60,7 +69,8 @@ export default {
     hideConnectModal() {
       this.connectModalVisible = false;
     },
-    showDisconnectModal() {
+    showDisconnectModal(port) {
+      this.selectedPort = port;
       this.disconnectModalVisible = true;
     },
     hideDisconnectModal() {

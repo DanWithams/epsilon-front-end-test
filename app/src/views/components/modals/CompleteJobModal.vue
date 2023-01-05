@@ -1,7 +1,7 @@
 <template>
   <ModalFrame title="Complete Job" @modal:hide="handleModalHide">
     <template v-slot:body>
-      Are you sure you want to complete this job and create a cable?
+      <p class="mb-2 text-gray-800 dark:text-zinc-400">Are you sure you want to complete this job?</p>
     </template>
     <template v-slot:footer="{ hideModal }">
       <div class="w-full flex flex-row justify-between">

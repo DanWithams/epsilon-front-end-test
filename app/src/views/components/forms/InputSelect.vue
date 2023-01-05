@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="max-h-56 overflow-scroll absolute top-[40px] left-[-2px] right-[-2px] rounded-b bg-zinc-100 dark:bg-zinc-900 border-2 border-t-0 border-indigo-400  z-50" v-if="open">
-        <div class="py-2 px-3 hover:bg-zinc-300 dark:hover:bg-zinc-800 hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer" :class="{ 'text-indigo-400' : modelValue && modelValue[labelledBy] === option[labelledBy]}" v-for="option in options" @click="selectOption(option)">
+        <div class="py-2 px-3 hover:bg-zinc-300 dark:hover:bg-zinc-800 text-gray-800 dark:text-zinc-300 hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer" :class="{ 'text-indigo-400' : modelValue && modelValue[labelledBy] === option[labelledBy]}" v-for="option in options" @click="selectOption(option)">
           {{ option[labelledBy] }}
         </div>
       </div>

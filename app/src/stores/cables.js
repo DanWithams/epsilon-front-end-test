@@ -9,7 +9,6 @@ export default {
     getters: {},
     mutations: {
         setCables (state, payload) {
-            console.log(payload);
             state.cables = payload;
         },
     },

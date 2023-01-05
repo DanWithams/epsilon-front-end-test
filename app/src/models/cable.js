@@ -15,7 +15,7 @@ export default class Cable extends BaseModel {
     }
 
     generateName() {
-        this.name = `${this.aPort.fullyQualifiedName}-${this.zPort.fullyQualifiedName}`;
+        return this.name = `${this.aPort.fullyQualifiedName}-${this.zPort.fullyQualifiedName}`;
     }
 
     otherPort(port) {

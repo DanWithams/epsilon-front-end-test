@@ -5,7 +5,7 @@
         <form class="relative flex flex-col rounded-lg bg-zinc-200 dark:bg-zinc-800 shadow-3xl" :class="size" @submit.prevent="$emit('modal:submit')">
           <div class="flex flex-row justify-between items-center px-6 py-4 bg-zinc-200 dark:bg-zinc-800 text-gray-800 dark:text-gray-400 rounded-t-lg" v-if="!hideHeader">
             <slot name="header" :hide-modal="hideModal">
-              <div>{{ title }}</div>
+              <div class="text-xl">{{ title }}</div>
             </slot>
             <div class="text-2xl text-gray-800 dark:text-gray-200 cursor-pointer" v-if="showClose" @click="handleCloseButtonClick">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
