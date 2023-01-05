@@ -56,6 +56,12 @@ export default {
         zPort: this.zPort,
       });
       this.$emit('job:created');
+      this.$store.dispatch('notifications/add', {
+        type: 'positive',
+        duration: 5000,
+        disableClose: true,
+        message: 'Connection job was created successfully',
+      });
     },
   },
 }

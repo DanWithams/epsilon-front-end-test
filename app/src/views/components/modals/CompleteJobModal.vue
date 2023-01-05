@@ -34,6 +34,12 @@ export default {
     async createJob() {
       await Api.completeJob(this.job);
       this.$emit('job:completed');
+      this.$store.dispatch('notifications/add', {
+        type: 'positive',
+        duration: 5000,
+        disableClose: true,
+        message: 'Job was completed successfully',
+      });
     }
   }
 }

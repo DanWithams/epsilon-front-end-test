@@ -40,6 +40,12 @@ export default {
         cable: this.cable,
       });
       this.$emit('job:created');
+      this.$store.dispatch('notifications/add', {
+        type: 'positive',
+        duration: 5000,
+        disableClose: true,
+        message: 'Disconnection job was created successfully',
+      });
     },
   },
 }

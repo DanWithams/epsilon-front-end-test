@@ -1,6 +1,7 @@
 <template>
   <div class="z-50">
     <div id="modal-container"></div>
+    <NotificationDock></NotificationDock>
   </div>
   <div class="z-10">
     <router-view class="z-10" v-slot="{ Component, route }">
@@ -13,9 +14,10 @@
 
 <script>
 import AppLayout from "./views/layouts/AppLayout.vue";
+import NotificationDock from "./views/components/NotificationDock.vue";
 
 export default {
-  components: {AppLayout},
+  components: {NotificationDock, AppLayout},
   watch: {
     '$store.state.app.darkMode': (darkMode) => {
       document.body.classList.toggle('dark', darkMode);
